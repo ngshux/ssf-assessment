@@ -13,7 +13,6 @@ public class SsfAssessmentApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SsfAssessmentApplication.class, args);
-		NewsService.getArticles();
 	}
 
 	@Bean

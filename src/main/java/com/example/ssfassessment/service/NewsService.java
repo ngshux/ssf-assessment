@@ -2,8 +2,11 @@ package com.example.ssfassessment.service;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -18,7 +21,7 @@ public class NewsService {
     //@Value("${apikey}")
     private String apiKey = System.getenv("apiKey");
 
-    public static List<Article> getArticles(){
+    public List<Article> getArticles(){
         String articleURL = UriComponentsBuilder.fromUriString(URL)
                             .toUriString();
 
@@ -35,5 +38,28 @@ public class NewsService {
             e.printStackTrace();
         }
         return articleList;
+    }
+
+    @Autowired
+    RedisTemplate<String,Article> redisTemplate;
+    public void saveArticles(Article arti){
+        redisTemplate.opsForValue().set(arti.getId(), arti);
+        redisTemplate.opsForValue().set(arti.getTitle(), arti);
+        redisTemplate.opsForValue().set(arti.getUrl(), arti);
+        redisTemplate.opsForValue().set(arti.getImageurl(), arti);
+        redisTemplate.opsForValue().set(arti.getBody(), arti);
+        redisTemplate.opsForValue().set(arti.getTags(), arti);
+        redisTemplate.opsForValue().set(arti.getCategories(), arti);
+        redisTemplate.opsForValue().set(arti.getPublished_on(), arti);
+    }
+
+    public Article[] getSavedArticles(){
+        Set<String> allArticleKeys = redisTemplate.keys("*");
+        List<Article> aArr = new LinkedList<Article>();
+        for ( String artiKey : allArticleKeys){
+            Article result = (Article) redisTemplate.opsForValue().get(artiKey);
+            aArr.add(result);
+        }
+        return aArr.toArray(new Article[aArr.size()]);
     }
 }

@@ -8,7 +8,6 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.core.io.buffer.DataBuffer;
 
 import jakarta.json.Json;
 import jakarta.json.JsonArray;
@@ -17,6 +16,7 @@ import jakarta.json.JsonReader;
 
 public class Article {
     private static final Logger logger = LoggerFactory.getLogger(Article.class);
+
     private String id;
     private String published_on;
     private String title;
@@ -46,10 +46,8 @@ public class Article {
                     a.body = art.getString("body");
                     a.categories = art.getString("categories");
                     a.tags = art.getString("tags");
-                    logger.info("TAGS " + a.tags + "CATS " + a.categories);
+                    //logger.info("TAGS " + a.tags + "CATS " + a.categories);
                     aList.add(a);
-                    logger.info("LISTTTTTTTT" + aList.toString());
-                    logger.info("LIST SIZE "+ aList.size());
                 }
 
             }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -14,7 +15,7 @@ import com.example.ssfassessment.model.Article;
 import com.example.ssfassessment.service.NewsService;
 
 @Controller
-@RequestMapping (path ="/")
+@RequestMapping (path ="/index")
 public class NewsController {
 
     @Autowired
@@ -27,6 +28,8 @@ public class NewsController {
         return "index";
     }
 
-   // @PostMapping("save")
-    //public String saveArticle(@RequestBody MultiValueMap)
+  //  @PostMapping("/articles")
+    //public String saveArticle(Model model){
+        
+ //   }
 }
