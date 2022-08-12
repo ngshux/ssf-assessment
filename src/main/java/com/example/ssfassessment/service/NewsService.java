@@ -16,7 +16,7 @@ public class NewsService {
     private static final String URL ="https://min-api.cryptocompare.com/data/v2/news/?lang=EN";
     
     @Value("${apikey}")
-    private String apiKey ="8915bc388adff9ed1a594a7cecfbede887a6e34ae3178f2b747e16e8b0e827f3";
+    private String apiKey;
 
     public static List<Article> getArticles(){
         String articleURL = UriComponentsBuilder.fromUriString(URL)
