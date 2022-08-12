@@ -6,20 +6,18 @@ import java.io.InputStream;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.xml.crypto.Data;
-
-import org.apache.logging.log4j.message.Message;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.yaml.snakeyaml.events.Event.ID;
+import org.springframework.core.io.buffer.DataBuffer;
 
 import jakarta.json.Json;
+import jakarta.json.JsonArray;
 import jakarta.json.JsonObject;
 import jakarta.json.JsonReader;
 
 public class Article {
     private static final Logger logger = LoggerFactory.getLogger(Article.class);
-    private Integer id;
+    private String id;
     private String published_on;
     private String title;
     private String url;
@@ -34,26 +32,38 @@ public class Article {
         try(InputStream is = new ByteArrayInputStream(json.getBytes())){
             JsonReader r = Json.createReader(is);
             JsonObject allArticles = r.readObject();
-            
-            logger.info("o >> "+ allArticles.toString());
-            for(String article : allArticles.keySet()){
-                //logger.info("article: " + allArticles.getValue(article));
-                Article a = new Article();
+            JsonArray data = allArticles.getJsonArray("Data");
 
-                a.title = article.;
-                logger.info("AAAAAAAAA" +a.title);
-                //a.body = allArticles.getString(Data.getValue());
+            for(String article : allArticles.keySet()){
+                Article a = new Article();
+                for (int i = 0; i < data.size(); i++) {
+                    JsonObject art = data.getJsonObject(i);
+                    a.id = art.getString("id");
+                    a.title = art.getString("title");
+                    a.published_on = art.getString("published_on");
+                    a.url = art.getString("url");
+                    a.imageurl = art.getString("imageurl");
+                    a.body = art.getString("body");
+                    a.categories = art.getString("categories");
+                    a.tags = art.getString("tags");
+                    logger.info("TAGS " + a.tags + "CATS " + a.categories);
+                    aList.add(a);
+                    logger.info("LISTTTTTTTT" + aList.toString());
+                    logger.info("LIST SIZE "+ aList.size());
+                }
+
             }
+
         }
         return aList;
     
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -101,12 +111,12 @@ public class Article {
         return tags;
     }
 
-    public void setTags(String tags) {
-        this.tags = tags;
-    }
-
     public String getCategories() {
         return categories;
+    }
+
+    public void setTags(String tags) {
+        this.tags = tags;
     }
 
     public void setCategories(String categories) {

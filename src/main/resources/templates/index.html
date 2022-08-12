@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>Crypto News of the Day</h3>
+    <div class="container">
+        <form action="/articles" method="post">
+            <option data-th-each="i : ${articles}"
+                    data-th-value="${i.getId}"
+                    data-th-text="${i.getTitle}"
+                    data-th-text="${i.getBody}"
+                    data-th-text="${i.getCategories}"
+                    data-th-text="${i.getTags}"
+                    data-th-text="${i.getPublished_on}"
+                    data-th-href = "{i.getUrl}"
+                    >
+            </option>
+        </form>
+
+</body>
+</html>

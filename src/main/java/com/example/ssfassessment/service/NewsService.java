@@ -15,12 +15,11 @@ import com.example.ssfassessment.model.Article;
 public class NewsService {
     private static final String URL ="https://min-api.cryptocompare.com/data/v2/news/?lang=EN";
     
-    @Value("${apikey}")
-    private String apiKey;
+    //@Value("${apikey}")
+    private String apiKey = System.getenv("apiKey");
 
     public static List<Article> getArticles(){
         String articleURL = UriComponentsBuilder.fromUriString(URL)
-                            .path("articles")
                             .toUriString();
 
         RestTemplate template = new RestTemplate();
