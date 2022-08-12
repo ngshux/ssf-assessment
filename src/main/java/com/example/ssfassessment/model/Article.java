@@ -46,15 +46,13 @@ public class Article {
                     a.body = art.getString("body");
                     a.categories = art.getString("categories");
                     a.tags = art.getString("tags");
-                    //logger.info("TAGS " + a.tags + "CATS " + a.categories);
+                    logger.info("TAGS " + a.tags + "CATS " + a.categories);
                     aList.add(a);
                 }
-
             }
-
         }
         return aList;
-    
+
     }
 
     public String getId() {

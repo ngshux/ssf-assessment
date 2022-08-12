@@ -8,25 +8,35 @@
 </head>
 <body>
     <h3>Crypto News of the Day</h3>
-    <div class="container">
-        <form th:action="/articles" method="post">
-            <div data-th-each="i : ${articles}"></div>
+
+    </table>
+    <form th:action="/articles" method="post">
+        <div data-th-each="i : ${articles}">
             <table>
-                    <tr data-th-value="${i.getId}"></tr>
-                    <td data-th-src="@{i.getImageurl}"></td>
-                    <tr data-th-text="${i.getTitle}"></tr>
-                    <tr data-th-text="${i.getBody}"></tr>
-                    <br>
-                    <tr data-th-text="${i.getTags}"></tr> 
-                    <tr data-th-text="${i.getCategories}"></tr>
-                    <br>
-                    <tr data-th-text="${i.getPublished_on}"></tr>
-                    <tr data-th-href = "${i.getUrl}"></tr>
-                        
-            </table>
-            <button type="submit">Save</button>
+                <tr >
+                    Id: <div data-th-value="${i.getId}"></tr>
+                <td >
+                    <div data-th-src="${i.getImageurl}"></td>
+                <tr>
+                    Title: <div data-th-text="#{i.getTitle}"></div>
+                </tr>
+                <tr>
+                    <div data-th-text="${i.getBody}"></tr>
+                <br>
+                <tr >
+                    Tags : <div data-th-text="${i.getTags}"></tr> 
+                <tr >
+                    Categories : <div data-th-text="${i.getCategories}"></tr>
+                <br>
+                <tr >
+                    Published on : <div data-th-text="${i.getPublished_on}"></tr>
+                <tr >
+                    <a th:href = "@{i.getUrl}">Link</tr>
+                    
+        </table>
+        <button type="submit">Save</button>
         </div>
-        </form>
+    </form>
 
 </body>
 </html>

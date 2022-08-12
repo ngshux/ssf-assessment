@@ -11,7 +11,7 @@ import com.example.ssfassessment.model.Article;
 import com.example.ssfassessment.service.NewsService;
 
 @RestController
-@RequestMapping(path = "/", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(path = "/articles", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 public class NewsRESTController {
     
     @Autowired

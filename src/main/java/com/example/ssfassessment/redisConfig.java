@@ -19,7 +19,7 @@ import com.example.ssfassessment.model.Article;
 
 @Configuration
 public class redisConfig {
-    private static final Logger logger = LoggerFactory.getLogger(RedisConfig.class);
+    private static final Logger logger = LoggerFactory.getLogger(redisConfig.class);
 
     @Value("${spring.redis.host}")
     private String redisHost;
@@ -40,7 +40,7 @@ public class redisConfig {
         config.setHostName(redisHost);
         config.setPort(redisPort.get());
         config.setPassword(redisPassword);
-        Jackson2JsonRedisSerializer jackson2JsonJsonSerializer = new Jackson2JsonRedisSerializer(Mastermind.class);
+        Jackson2JsonRedisSerializer jackson2JsonJsonSerializer = new Jackson2JsonRedisSerializer(Article.class);
 
         final JedisClientConfiguration jedisClient = JedisClientConfiguration.builder().build();
         final JedisConnectionFactory jedisFac = new JedisConnectionFactory(config, jedisClient);
